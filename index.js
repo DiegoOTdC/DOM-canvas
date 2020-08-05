@@ -6,6 +6,7 @@ function main() {
   const saveDrawingButton = document.querySelector("button");
   const column2 = document.querySelector("#column2");
   const reset = document.querySelector("#reset");
+  const slider = document.querySelector("#slider");
   //canvas size
   canvas.height = window.innerHeight / 1.5;
   canvas.width = window.innerWidth / 2.1;
@@ -44,7 +45,7 @@ function main() {
 
   function draw(event) {
     if (!painting) return;
-    context.lineWidth = 10;
+    context.lineWidth = setSizePencil;
     context.lineCap = "round"; //makes line round
     context.strokeStyle = changeColor;
 
@@ -99,6 +100,11 @@ function main() {
     backgroundColorInput.value = "#FFFFFF";
   }
 
+  function setSizePencil(event) {
+    console.log("value", event.target.value);
+    context.lineWidth = event.target.value;
+  }
+
   //user can change the color
   colorInput.addEventListener("input", changeColor);
   backgroundColorInput.addEventListener("input", changeBackgroundColor);
@@ -114,6 +120,9 @@ function main() {
 
   //reset canvas
   reset.addEventListener("click", resetCanvas);
+
+  //slider
+  slider.addEventListener("input", setSizePencil);
 }
 
 if (document.readyState === "loading") {
